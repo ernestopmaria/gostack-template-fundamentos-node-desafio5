@@ -15,7 +15,12 @@ class CreateTransactionService {
   }
 
   public execute({title, value, type}:Request): Transaction {
-    // TODO
+    const transaction = this.transactionsRepository.create({
+      title,
+      value,
+      type
+    });
+    return transaction;
   }
 }
 
