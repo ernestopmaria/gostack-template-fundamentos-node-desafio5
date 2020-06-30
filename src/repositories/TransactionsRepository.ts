@@ -24,7 +24,7 @@ class TransactionsRepository {
   }
 
   public getBalance(): Balance {
-    const balance = this.transactions.reduce(
+    const {income, outcome} = this.transactions.reduce(
       (accumulator: Balance, transation:Transaction)=>{
       switch(transation.type){
         case "income":
@@ -41,7 +41,10 @@ class TransactionsRepository {
       income: 0,
       outcome :0,
       total: 0
-    })
+    },
+    );
+    const total = income- outcome;
+    return {income, outcome, total};
   }
 
   public create({title, value, type}:CreateTransactionDTO): Transaction {
